@@ -797,6 +797,11 @@ namespace PoorMansTSqlFormatterLib.Formatters
             }
         }
 
+        public string FormatSQLTreeByPrefix(Node sqlTree, string prefix)
+        {
+            throw new NotImplementedException();
+        }
+
         class TSqlStandardFormattingState : BaseFormatterState
         {
             //normal constructor

@@ -20,6 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
 using PoorMansTSqlFormatterLib.Interfaces;
+using System.Text.RegularExpressions;
+using PoorMansTSqlFormatterLib.ParseStructure;
 
 namespace PoorMansTSqlFormatterLib.Formatters
 {
@@ -91,8 +93,79 @@ namespace PoorMansTSqlFormatterLib.Formatters
         public string FormatSQLTree(PoorMansTSqlFormatterLib.ParseStructure.Node sqlTree)
         {
             string formattedResult = _underlyingFormatter.FormatSQLTree(sqlTree);
+          
             if (_underlyingFormatter.HTMLFormatted)
                 return string.Format(HTML_OUTER_PAGE, formattedResult);
+            else
+                return string.Format(HTML_OUTER_PAGE, Utils.HtmlEncode(formattedResult));
+        }
+
+        public string FormatSQLTreeByPrefix(Node sqlTree, string prefix)
+        {
+            string formattedResult = _underlyingFormatter.FormatSQLTree(sqlTree);
+            String[] test = formattedResult.Split(new String[] { "</span>\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            String Result = "";
+            for (int i = 0; i < test.Length; i++)
+            {
+                if (Regex.IsMatch(test[i].Trim(), "^\\<span class=\"SQLComment\"\\>.*", RegexOptions.IgnoreCase))
+                {
+                    Result += Regex.Replace(test[i], "\\t", "") + "</span>\r\n";
+                }
+                else if (Regex.IsMatch(test[i].Trim(), "\\<span class=\"SQLComment\"\\>.*", RegexOptions.IgnoreCase))
+                {
+                    String[] tes = test[i].Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    if (tes.Length > 0)
+                    {
+                        for (int j = 0; j < tes.Length; j++)
+                        {
+                            if ((tes.Length - 1) == j)
+                            {
+                                tes[j] += "</span>";
+                            }
+                            if (Regex.IsMatch(tes[j].Trim(), "^\\<span class=\"SQLComment\"\\>.*\\</span\\>$", RegexOptions.IgnoreCase))
+                            {
+                                string pattern = "(?<comment>\\<span class=\"SQLComment\"\\>.*|//.*)";
+                                Result += Regex.Replace(tes[j], pattern, "${comment}\r\n", RegexOptions.IgnoreCase);
+                            }else if (Regex.IsMatch(tes[j].Trim(), "\\<span class=\"SQLComment\"\\>.*\\</span\\>$", RegexOptions.IgnoreCase))
+                            {
+                                string pattern = "(?<comment>\\<span class=\"SQLComment\"\\>.*|//.*)";
+                                Result += (prefix + ".append(\"\t" + Regex.Replace(tes[j], pattern, "\");\r\n${comment}\r\n", RegexOptions.IgnoreCase));
+                            }
+                            else
+                            {
+                                Result += (prefix + ".append(\"\t" + tes[j] + "\");\r\n");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Result += (prefix + ".append(\"\t" + tes[i] + "\");\r\n");
+                    }
+
+                }
+                else
+                {
+                    String[] tes = test[i].Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    if (tes.Length > 1)
+                    {
+                        for (int j = 0; j < tes.Length; j++)
+                        {
+                            if ((tes.Length - 1) == j)
+                            {
+                                tes[j] += "</span>";
+                            }
+                            Result += (prefix + ".append(\"\t" + tes[j] + "\");\r\n");
+                        }
+                    }
+                    else if(tes.Length > 0)
+                    {
+                        Result += (prefix + ".append(\"\t" + tes[0] + "</span>\");\r\n");
+                    }
+                }
+                Result = Result.Replace("--", "//");
+            }
+            if (_underlyingFormatter.HTMLFormatted)
+                return string.Format(HTML_OUTER_PAGE, Result);
             else
                 return string.Format(HTML_OUTER_PAGE, Utils.HtmlEncode(formattedResult));
         }

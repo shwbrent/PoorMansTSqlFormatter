@@ -12,6 +12,22 @@
     <AssemblyName>PoorMansTSqlFormatterDemo</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PublishUrl>發行\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +51,18 @@
     <PostBuildEvent>Call $(MSBuildProjectDirectory)\Postbuild_Merge.bat $(TargetDir)</PostBuildEvent>
     <PreBuildEvent>Call $(MSBuildProjectDirectory)\PreBuild_Replace.bat $(SolutionDir) $(MSBuildProjectDirectory)</PreBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>CF8365534215D5459807CB111B38B98733250F07</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>PoorMansTSqlFormatterDemo_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -45,13 +73,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox.cs" />
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="AboutBox.designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrameworkClassReplacements\CustomContentWebBrowser.cs" />
-    <Compile Include="FrameworkClassReplacements\RadioToolStripMenuItem.cs" />
-    <Compile Include="FrameworkClassReplacements\SelectableTextBox.cs" />
+    <Compile Include="FrameworkClassReplacements\CustomContentWebBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FrameworkClassReplacements\RadioToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FrameworkClassReplacements\SelectableTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="FrameworkClassReplacements\SingleAssemblyComponentResourceManager.cs" />
     <Compile Include="FrameworkClassReplacements\SingleAssemblyResourceManager.cs" />
     <Compile Include="GeneralLanguageContent.Designer.cs">
@@ -59,7 +95,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GeneralLanguageContent.resx</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
@@ -84,6 +122,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="PoorMansTSqlFormatterDemo_TemporaryKey.pfx" />
     <None Include="Postbuild_Merge.bat" />
     <None Include="PreBuild_Replace.bat" />
     <None Include="Properties\Settings.settings">
@@ -118,6 +157,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

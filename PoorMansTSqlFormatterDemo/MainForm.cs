@@ -209,15 +209,16 @@ namespace PoorMansTSqlFormatterDemo
 
             var tokenizedSql = _tokenizer.TokenizeSQL(txt_Input.Text, txt_Input.SelectionStart);
 
-            if (!splitContainer4.Panel2Collapsed && !splitContainer5.Panel1Collapsed)
-                txt_TokenizedSql.Text = tokenizedSql.PrettyPrint();
+            //if (!splitContainer4.Panel2Collapsed && !splitContainer5.Panel1Collapsed)
+                //txt_TokenizedSql.Text = tokenizedSql.PrettyPrint();
 
             var parsedSql = _parser.ParseSQL(tokenizedSql);
             
-            if (!splitContainer4.Panel2Collapsed && !splitContainer5.Panel2Collapsed)
-                txt_ParsedXml.Text = parsedSql.ToXmlDoc().OuterXml;
+            //if (!splitContainer4.Panel2Collapsed && !splitContainer5.Panel2Collapsed)
+                //txt_ParsedXml.Text = parsedSql.ToXmlDoc().OuterXml;
 
-            webBrowser_OutputSql.SetHTML(_formatter.FormatSQLTree(parsedSql));
+            //webBrowser_OutputSql.SetHTML(_formatter.FormatSQLTree(parsedSql));
+            webBrowser_OutputSql.SetHTML(_formatter.FormatSQLTreeByPrefix(parsedSql, prefix.Text.Trim().ToLower()));
         }
 
         private void TryToDoFormatting()
@@ -329,5 +330,9 @@ namespace PoorMansTSqlFormatterDemo
                 about.ShowDialog();
         }
 
+        private void prefix_TextChanged(object sender, EventArgs e)
+        {
+            TryToDoFormatting();
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace PoorMansTSqlFormatterDemo
         /// </summary>
         private void InitializeComponent()
         {
-            FrameworkClassReplacements.SingleAssemblyComponentResourceManager resources = new FrameworkClassReplacements.SingleAssemblyComponentResourceManager(typeof(AboutBox));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutBox));
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.labelProductName = new System.Windows.Forms.Label();
@@ -78,13 +78,11 @@ namespace PoorMansTSqlFormatterDemo
             // labelProductName
             // 
             resources.ApplyResources(this.labelProductName, "labelProductName");
-            this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelProductName.Name = "labelProductName";
             // 
             // labelCopyright
             // 
             resources.ApplyResources(this.labelCopyright, "labelCopyright");
-            this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelCopyright.Name = "labelCopyright";
             // 
             // textBoxDescription

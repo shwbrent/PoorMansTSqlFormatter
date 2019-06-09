@@ -54,7 +54,6 @@ namespace PoorMansTSqlFormatterDemo
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -102,8 +101,9 @@ namespace PoorMansTSqlFormatterDemo
             this.displayFormattingOptionsAreaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.prefix = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txt_Input = new PoorMansTSqlFormatterDemo.FrameworkClassReplacements.SelectableTextBox();
-            this.txt_TokenizedSql = new PoorMansTSqlFormatterDemo.FrameworkClassReplacements.SelectableTextBox();
             this.txt_ParsedXml = new PoorMansTSqlFormatterDemo.FrameworkClassReplacements.SelectableTextBox();
             this.webBrowser_OutputSql = new PoorMansTSqlFormatterDemo.FrameworkClassReplacements.CustomContentWebBrowser();
             this.englishToolStripMenuItem = new PoorMansTSqlFormatterDemo.FrameworkClassReplacements.RadioToolStripMenuItem();
@@ -119,7 +119,6 @@ namespace PoorMansTSqlFormatterDemo
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
@@ -132,6 +131,7 @@ namespace PoorMansTSqlFormatterDemo
             this.grp_IdentityFormattingOptions.SuspendLayout();
             this.grp_ObfuscationOptions.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -181,13 +181,6 @@ namespace PoorMansTSqlFormatterDemo
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.groupBox3);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txt_TokenizedSql);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
             // 
             // groupBox3
             // 
@@ -564,6 +557,19 @@ namespace PoorMansTSqlFormatterDemo
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // prefix
+            // 
+            resources.ApplyResources(this.prefix, "prefix");
+            this.prefix.Name = "prefix";
+            this.prefix.TextChanged += new System.EventHandler(this.prefix_TextChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.prefix);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            // 
             // txt_Input
             // 
             this.txt_Input.AcceptsReturn = true;
@@ -571,14 +577,6 @@ namespace PoorMansTSqlFormatterDemo
             resources.ApplyResources(this.txt_Input, "txt_Input");
             this.txt_Input.Name = "txt_Input";
             this.txt_Input.TextChanged += new System.EventHandler(this.txt_Input_TextChanged);
-            // 
-            // txt_TokenizedSql
-            // 
-            this.txt_TokenizedSql.AcceptsReturn = true;
-            this.txt_TokenizedSql.AcceptsTab = true;
-            resources.ApplyResources(this.txt_TokenizedSql, "txt_TokenizedSql");
-            this.txt_TokenizedSql.Name = "txt_TokenizedSql";
-            this.txt_TokenizedSql.ReadOnly = true;
             // 
             // txt_ParsedXml
             // 
@@ -634,8 +632,6 @@ namespace PoorMansTSqlFormatterDemo
             this.splitContainer5.Panel1.ResumeLayout(false);
             this.splitContainer5.Panel2.ResumeLayout(false);
             this.splitContainer5.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -654,6 +650,8 @@ namespace PoorMansTSqlFormatterDemo
             this.grp_ObfuscationOptions.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -663,8 +661,6 @@ namespace PoorMansTSqlFormatterDemo
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private PoorMansTSqlFormatterDemo.FrameworkClassReplacements.SelectableTextBox txt_Input;
-        private PoorMansTSqlFormatterDemo.FrameworkClassReplacements.SelectableTextBox txt_TokenizedSql;
-        private PoorMansTSqlFormatterDemo.FrameworkClassReplacements.SelectableTextBox txt_ParsedXml;
         private System.Windows.Forms.RadioButton radio_Formatting_Standard;
         private System.Windows.Forms.RadioButton radio_Formatting_Identity;
         private System.Windows.Forms.CheckBox chk_ExpandCommaLists;
@@ -680,8 +676,6 @@ namespace PoorMansTSqlFormatterDemo
         private PoorMansTSqlFormatterDemo.FrameworkClassReplacements.CustomContentWebBrowser webBrowser_OutputSql;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckBox chk_Coloring;
@@ -720,6 +714,10 @@ namespace PoorMansTSqlFormatterDemo
 		private System.Windows.Forms.Label lbl_ClauseBreaks;
 		private System.Windows.Forms.TextBox txt_StatementBreaks;
 		private System.Windows.Forms.Label lbl_StatementBreaks;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private FrameworkClassReplacements.SelectableTextBox txt_ParsedXml;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox prefix;
     }
 }
 

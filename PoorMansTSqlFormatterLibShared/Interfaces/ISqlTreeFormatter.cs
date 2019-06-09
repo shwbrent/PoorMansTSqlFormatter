@@ -27,5 +27,7 @@ namespace PoorMansTSqlFormatterLib.Interfaces
         bool HTMLFormatted { get; }
         string ErrorOutputPrefix { get; set; }
         string FormatSQLTree(Node sqlTree);
+
+        string FormatSQLTreeByPrefix(Node sqlTree, string prefix);
     }
 }

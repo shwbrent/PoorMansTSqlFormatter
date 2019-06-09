@@ -203,7 +203,7 @@ namespace PoorMansTSqlFormatterLib.Formatters
                 state.CloseClass();
         }
 
-
+        
         public string FormatSQLTokens(ITokenList sqlTokenList)
         {
             StringBuilder outString = new StringBuilder();
@@ -273,5 +273,11 @@ namespace PoorMansTSqlFormatterLib.Formatters
 
             return outString.ToString();
         }
+
+        public string FormatSQLTreeByPrefix(Node sqlTree, string prefix)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

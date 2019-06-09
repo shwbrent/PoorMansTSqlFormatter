@@ -313,6 +313,11 @@ namespace PoorMansTSqlFormatterLib.Formatters
             return new string(keywordCharArray);
         }
 
+        public string FormatSQLTreeByPrefix(Node sqlTree, string prefix)
+        {
+            throw new NotImplementedException();
+        }
+
         class TSqlObfuscatingFormattingState : BaseFormatterState
         {
             public TSqlObfuscatingFormattingState(bool randomizeColor, bool randomizeLineLength)
